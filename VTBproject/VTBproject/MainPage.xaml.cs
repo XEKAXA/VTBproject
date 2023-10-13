@@ -11,13 +11,18 @@
 
         private void OnCounterClicked(object sender, EventArgs e)
         {
-            count++;
+            OfficeArray officeArray = new OfficeArray();
+            ATMList aTMList = new ATMList();
 
-            if (count == 1)
-                CounterBtn.Text = $"Clicked {count} time";
-            else
-                CounterBtn.Text = $"Clicked {count} times";
+            string exePath = System.Reflection.Assembly.GetExecutingAssembly().Location;
+            string exeDirectory = Path.GetDirectoryName(exePath);
+            Directory.SetCurrentDirectory(exeDirectory);
+            string currentDirectory = Directory.GetCurrentDirectory();
+            string relativeFilePath = Path.Combine(currentDirectory, "atms.txt");
 
+            aTMList.GetListFromJson(File.ReadAllText(relativeFilePath));
+
+            CounterBtn.Text = aTMList.ShowFirst5();
             SemanticScreenReader.Announce(CounterBtn.Text);
         }
     }
