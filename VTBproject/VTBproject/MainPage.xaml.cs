@@ -17,10 +17,12 @@
             string exePath = System.Reflection.Assembly.GetExecutingAssembly().Location;
             string exeDirectory = Path.GetDirectoryName(exePath);
             Directory.SetCurrentDirectory(exeDirectory);
-            string currentDirectory = Directory.GetCurrentDirectory();
-            string relativeFilePath = Path.Combine(currentDirectory, "atms.txt");
 
-            aTMList.GetListFromJson(File.ReadAllText(relativeFilePath));
+            string OfficeFilePath = Path.Combine(Directory.GetCurrentDirectory(), "offices.txt");
+            string ATMFilePath = Path.Combine(Directory.GetCurrentDirectory(), "atms.txt");
+
+            officeArray.GetListFromJson(File.ReadAllText(OfficeFilePath));
+            aTMList.GetListFromJson(File.ReadAllText(ATMFilePath));
 
             CounterBtn.Text = aTMList.ShowFirst5();
             SemanticScreenReader.Announce(CounterBtn.Text);
