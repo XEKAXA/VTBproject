@@ -2,22 +2,63 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="VTBproject.MainPage">
-   
-    <VerticalStackLayout>
-        <WebView 
-            Source="https://www.openstreetmap.org/export#map=13/55.7503/37.6366"
-            x:Name="webView_map"
-            HeightRequest="450"/>
-        <HorizontalStackLayout HorizontalOptions="Center">
-            <Button
-                x:Name="btn_LoadData"
-                Text="Get Data"
-                SemanticProperties.Hint="Get data from files"
-                Clicked="btn_LoadDataClicked"
-                HorizontalOptions="Center"
-                IsEnabled="True"/>
-        </HorizontalStackLayout>
 
-    </VerticalStackLayout>
+    <ScrollView>
+        <Grid>
+            <VerticalStackLayout>
+                <WebView 
+                    Source="https://www.openstreetmap.org/#map=12/55.7489/37.6313"
+                    x:Name="WV_Map"
+                    HeightRequest="450"/>
+                <HorizontalStackLayout HorizontalOptions="Center">
+                    <Button
+                        x:Name="btn_LoadData"
+                        Text="Get Data"
+                        SemanticProperties.Hint="Get data from files"
+                        Clicked="btn_LoadDataClicked"
+                        HorizontalOptions="Center"
+                        IsEnabled="True"/>
+                        <Button
+                        x:Name="btn_LoadMap"
+                        Text="Get Map"
+                        SemanticProperties.Hint="Get Map from files"
+                        Clicked="btn_WV_MapClicked"
+                        HorizontalOptions="Center"/>
+                    <Button
+                        x:Name="btn_GPTVisible"
+                        Text="Chat"
+                        SemanticProperties.Hint="Go to chat"
+                        Clicked="btn_GPTVisibleClicked"
+                        HorizontalOptions="Center"/>
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+            <Frame x:Name ="frame_GPT" IsVisible="false">
+                <VerticalStackLayout HorizontalOptions="Center">
+                    <HorizontalStackLayout HorizontalOptions="Center">
+                        <Entry 
+                            x:Name="entry_Request"
+                            Placeholder = "Введите ваш запрос"/>
+                        <Button
+                            x:Name="btn_AskGPT"
+                            Text="Send question"
+                            SemanticProperties.Hint="Get answer from GPT"
+                            Clicked="btn_AskGPTClicked"
+                            HorizontalOptions="Center"/>
+                        <Button
+                            x:Name="btn_Return"
+                            Text="Return"
+                            SemanticProperties.Hint="Return to map"
+                            Clicked="btn_ReturnClicked"
+                            HorizontalOptions="Center"/>
+                    </HorizontalStackLayout>
+                    <Label
+                        x:Name="lb_AnswerFromGPT"
+                        Text="Waiting for answer..."
+                        HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+            </Frame>
+            
+        </Grid>
+    </ScrollView>
 
 </ContentPage>
