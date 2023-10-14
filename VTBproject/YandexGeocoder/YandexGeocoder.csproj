@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
+    <Version>0.4.4</Version>
+
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Authors>Nick Chursin</Authors>
+    <Description>Lightweight .NET wrapper of Yandex Geocoder API - service for converting geographical coordinates to an address and back.</Description>
+    <PackageId>YandexGeocoder</PackageId>
+    <AssemblyName>YandexGeocoder</AssemblyName>
+    <RootNamespace>YandexGeocoder</RootNamespace>
+    <PackageProjectUrl>https://github.com/unickq/YandexGeocoder</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/unickq/YandexGeocoder</RepositoryUrl>
+    <PackageReleaseNotes>Added async methods</PackageReleaseNotes>
+    <PackageTags>yandex geocoder maps geocode nearby places coordinate geolocation location</PackageTags>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
+    <PackageIcon>logo.png</PackageIcon>
+  </PropertyGroup>
+
+</Project>
