@@ -1,41 +1,55 @@
-﻿using System;
+﻿using OpenAI_API.Completions;
+using OpenAI_API.Models;
+using OpenAI_API.Moderation;
+using System;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using VTBproject.Properties;
 
 namespace VTBproject
 {
     public class GPTTalker
     {
-        private readonly string _apiKey;
-        private readonly string _apiUrl = "https://api.openai.com/v1/chat/completions";
-
-        public GPTTalker(string apiKey)
+        private readonly string apiKey = "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";
+        private OpenAI_API.OpenAIAPI api;
+        public GPTTalker()
         {
-            _apiKey = apiKey;
+            api = new OpenAI_API.OpenAIAPI(apiKey);
         }
 
-        public async Task<string> GenerateResponse(string prompt)
+        public void SetSettings()
         {
-            string requestBody = $"{{\"prompt\": \"{prompt}\", \"max_tokens\": 150}}";
-
-            using (HttpClient client = new HttpClient())
+            string prompt = File.ReadAllText("C:\\More.Tech\\VTBproject\\VTBproject\\VTBproject\\Resources\\Data\\SettingsForChat.txt");
+            if (chat == null) { RefreshConversation(); }
+            chat.AppendSystemMessage(prompt);
+        }
+        public async Task<string> CompletPrompt(string prompt)
+        {
+            string answer = string.Empty;
+            await foreach (var token in api.Completions.StreamCompletionEnumerableAsync(new CompletionRequest(prompt, Model.DavinciText, 200, 0.5, presencePenalty: 0.1, frequencyPenalty: 0.1)))
             {
-                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", _apiKey);
-                HttpContent content = new StringContent(requestBody, Encoding.UTF8, "application/json");
-
-                HttpResponseMessage response = await client.PostAsync(_apiUrl, content);
-
-                if (response.IsSuccessStatusCode)
-                {
-                    string result = await response.Content.ReadAsStringAsync();
-                    return result;
-                }
-                else
-                {
-                    throw new Exception($"Ошибка при выполнении запроса к API. Код состояния: {response.StatusCode}");
-                }
+                answer += token;
             }
+            return answer;
+        }
+
+        OpenAI_API.Chat.Conversation chat;
+
+        public void RefreshConversation()
+        {
+            chat = api.Chat.CreateConversation();
+        }
+        public async Task<string> Talk(string prompt)
+        {
+            if (chat == null) { RefreshConversation(); }
+            chat.AppendUserInput(prompt);
+            string answer = string.Empty;
+            await foreach (var res in chat.StreamResponseEnumerableFromChatbotAsync())
+            {
+                answer += res;  
+            }
+            return answer;
         }
     }
 }

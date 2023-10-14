@@ -4,6 +4,7 @@ using OpenAI_API;
 using System.Xml.Serialization;
 using OpenAI_API.Chat;
 using OpenAI_API.Moderation;
+using OpenAI_API.Completions;
 
 namespace VTBproject
 {
@@ -13,6 +14,8 @@ namespace VTBproject
         public MainPage()
         {
             InitializeComponent();
+            gptTalker = new GPTTalker();
+            gptTalker.SetSettings();
         }
         private void btn_GPTVisibleClicked(object sender, EventArgs e)
         {
@@ -27,17 +30,9 @@ namespace VTBproject
         {
             Button button = (Button)sender;
             button.IsEnabled = false;
-            var api = new OpenAI_API.OpenAIAPI("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");
-            string result = string.Empty;
-            var chat = api.Chat.CreateConversation();
-            chat.AppendUserInput(entry_Request.Text);
-
-            await foreach (var res in chat.StreamResponseEnumerableFromChatbotAsync())
-            {
-                result += res;
-            }
-            lb_AnswerFromGPT.Text = result;
+            lb_AnswerFromGPT.Text = await gptTalker.Talk(entry_Request.Text);
             button.IsEnabled = true;
+            lb_AnswerFromGPT.IsVisible = true;
         }
         private void btn_WV_MapClicked(object sender, EventArgs e)
         {
