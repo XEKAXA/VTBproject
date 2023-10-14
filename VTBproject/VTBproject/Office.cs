@@ -13,7 +13,7 @@ namespace VTBproject
         public Office(string salePointName, string address, string status, List<OpenHours> listOpenHours,
                   string rko, List<OpenHours> openHoursIndividual, string officeType, string salePointFormat,
                   string suoAvailability, string hasRamp, double latitude, double longitude, object metroStation,
-                  int distance, bool kep, bool myBranch)
+                  int distance, string kep, bool myBranch)
         {
             SalePointName = salePointName;
             Address = address;
@@ -29,7 +29,8 @@ namespace VTBproject
             Longitude = longitude;
             MetroStation = metroStation;
             Distance = distance;
-            Kep = kep;
+            if (kep == null) Kep = false;
+            else Kep = Convert.ToBoolean(kep);
             MyBranch = myBranch;
         }
         
