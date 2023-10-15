@@ -14,7 +14,7 @@ namespace VTBproject
 
         public void SetSettings()
         {
-            string prompt = File.ReadAllText("C:\\More.Tech\\VTBproject\\VTBproject\\VTBproject\\Resources\\Data\\SettingsForChat.txt");
+            string prompt = "Source";
             if (chat == null) { RefreshConversation(); }
             chat.AppendSystemMessage(prompt);
         }

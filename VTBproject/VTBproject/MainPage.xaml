@@ -12,19 +12,6 @@
                     HeightRequest="450"/>
                 <HorizontalStackLayout HorizontalOptions="Center">
                     <Button
-                        x:Name="btn_LoadData"
-                        Text="Get Data"
-                        SemanticProperties.Hint="Get data from files"
-                        Clicked="btn_LoadDataClicked"
-                        HorizontalOptions="Center"
-                        IsEnabled="True"/>
-                        <Button
-                        x:Name="btn_LoadMap"
-                        Text="Get Map"
-                        SemanticProperties.Hint="Get Map from files"
-                        Clicked="btn_WV_MapClicked"
-                        HorizontalOptions="Center"/>
-                    <Button
                         x:Name="btn_GPTVisible"
                         Text="Chat"
                         SemanticProperties.Hint="Go to chat"
@@ -37,6 +24,7 @@
                     <HorizontalStackLayout HorizontalOptions="Center">
                         <Entry 
                             x:Name="entry_Request"
+                            Text=""
                             Placeholder = "Введите ваш запрос"/>
                         <Button
                             x:Name="btn_AskGPT"

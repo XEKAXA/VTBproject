@@ -11,14 +11,6 @@ namespace VTBproject
 {
     internal class ATM
     {
-        public ATM(string address, double latitude, double logitude, bool allDay) 
-        { 
-            this.Address = address;
-            this.Latitude = latitude;
-            this.Longitude = logitude;
-            this.AllDay = allDay;
-            AvailableServices = new Services();
-        }
         [JsonProperty("address")]
         public string Address { get; set; }
         [JsonProperty("latitude")]
@@ -44,17 +36,6 @@ namespace VTBproject
                 SupportsEur = supportsEur;
                 SupportsRub = supportsRub;
             }
-            public Services()
-            {
-                Wheelchair = new Service();
-                Blind = new Service();
-                NfcForBankCards = new Service();
-                QrRead = new Service();
-                SupportsUsd = new Service();
-                SupportsChargeRub = new Service();
-                SupportsEur = new Service();
-                SupportsRub = new Service();
-            }
             [JsonProperty("wheelchair")]
             public Service Wheelchair { get; set; }
             [JsonProperty("blind")]
@@ -74,11 +55,6 @@ namespace VTBproject
         }
         public class Service
         {
-            public Service()
-            {
-                this.ServiceCapability = "UNKOWN";
-                this.ServiceActivity = "UNKOWN";
-            }
             [JsonProperty("serviceCapability")]
             public string ServiceCapability { get; set; }
             [JsonProperty("serviceActivity")]

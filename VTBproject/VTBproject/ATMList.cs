@@ -1,10 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using VTBproject.Properties;
 
 namespace VTBproject
 {
@@ -16,7 +10,27 @@ namespace VTBproject
         {
             Items = JsonConvert.DeserializeObject<List<ATM>>(jsonStr);
         }
+        public ATM GetATMWithParametrs(string parametr)
+        {
+            // Адрес, который вы ищете
+            string[] parametrs = parametr.Split('|');
+            string searchParameter = parametrs[2];
+            string searchField = parametrs[0];
 
+            var query = Items.Where(o => o.Address.Contains(searchParameter));
+
+            var atm = query.FirstOrDefault();
+            return atm;
+        }
+        object GetPropertyValue(ATM atm, string propertyName)
+        {
+            var property = atm.GetType().GetProperty(propertyName);
+            if (property != null)
+            {
+                return property.GetValue(atm);
+            }
+            return null;
+        }
         public string ShowFirst()
         {
             string result = "";
