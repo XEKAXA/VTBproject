@@ -1,11 +1,5 @@
 ﻿using OpenAI_API.Completions;
 using OpenAI_API.Models;
-using OpenAI_API.Moderation;
-using System;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
-using VTBproject.Properties;
 
 namespace VTBproject
 {

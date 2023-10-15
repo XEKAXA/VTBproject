@@ -55,6 +55,10 @@
                         x:Name="lb_AnswerFromGPT"
                         Text="Waiting for answer..."
                         HorizontalOptions="Center"/>
+                    <Label
+                        x:Name="lb_Offices"
+                        Text=""
+                        HorizontalOptions="Center"/>
                 </VerticalStackLayout>
             </Frame>
             

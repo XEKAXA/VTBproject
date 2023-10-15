@@ -15,7 +15,7 @@ namespace VTBproject
                   string suoAvailability, string hasRamp, double latitude, double longitude, object metroStation,
                   int distance, string kep, bool myBranch)
         {
-            SalePointName = salePointName;
+            this.salePointName = salePointName;
             Address = address;
             Status = status;
             ListOpenHours = listOpenHours;
@@ -33,8 +33,8 @@ namespace VTBproject
             else Kep = Convert.ToBoolean(kep);
             MyBranch = myBranch;
         }
-        
-        public string SalePointName { get; private set; }
+        [JsonProperty("salePointName")]
+        public string salePointName { get; private set; }
         public string Address { get; private set; }
         public string Status { get; private set; }
         public List<OpenHours> ListOpenHours { get; private set; }

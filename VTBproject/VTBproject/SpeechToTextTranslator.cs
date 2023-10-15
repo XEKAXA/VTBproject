@@ -1,40 +1,33 @@
-﻿using NaturalLanguage;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Speech;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿using System.Speech.Recognition;
 namespace VTBproject
 {
     class SpeechToTextTranslator
     {
-        async Task Listen(CancellationToken cancellationToken)
+       /* SpeechRecognitionEngine recognizer; 
+        
+        public SpeechToTextTranslator()
         {
-            var isGranted = await speechToText.RequestPermissions(cancellationToken);
-            if (!isGranted)
-            {
-                await Toast.Make("Permission not granted").Show(CancellationToken.None);
-                return;
-            }
-
-            var recognitionResult = await speechToText.ListenAsync(
-                                                CultureInfo.GetCultureInfo(Language),
-                                                new Progress<string>(partialText =>
-                                                {
-                                                    RecognitionText += partialText + " ";
-                                                }), cancellationToken);
-
-            if (recognitionResult.IsSuccessful)
-            {
-                RecognitionText = recognitionResult.Text;
-            }
-            else
-            {
-                await Toast.Make(recognitionResult.Exception?.Message ?? "Unable to recognize speech").Show(CancellationToken.None);
-            }
+            recognizer = new SpeechRecognitionEngine();
         }
+
+        public string StartRecord()
+        {
+            recognizer.SetInputToDefaultAudioDevice();
+            recognizer.LoadGrammar(new DictationGrammar());
+
+            // Обработка события распознавания речи
+            recognizer.SpeechRecognized += new EventHandler<SpeechRecognizedEventArgs>(recognizer_SpeechRecognized);
+
+            // Начать асинхронное распознавание речи
+            recognizer.RecognizeAsync(RecognizeMode.Multiple);
+
+            // Ожидание нажатия клавиши Enter для завершения программы
+            Console.WriteLine("Нажмите Enter для завершения");
+            Console.ReadLine();
+        }
+        static string recognizer_SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
+        {
+            return e.Result.Text;
+        }*/
     }
 }
