@@ -4,6 +4,7 @@ using OpenAI_API;
 using System.Xml.Serialization;
 using OpenAI_API.Chat;
 using OpenAI_API.Moderation;
+using VTBproject.Geolocator;
 
 namespace VTBproject
 {
@@ -22,7 +23,7 @@ namespace VTBproject
         {
             frame_GPT.IsVisible = false;
         }
-        
+
         private async void btn_AskGPTClicked(object sender, EventArgs e)
         {
             Button button = (Button)sender;
@@ -41,19 +42,44 @@ namespace VTBproject
         }
         private void btn_WV_MapClicked(object sender, EventArgs e)
         {
-            WV_Map.Source = File.ReadAllText("C:\\More.Tech\\VTBproject\\VTBproject\\VTBproject\\Resources\\Data\\map.html");
+            WV_Map.Source = File.ReadAllText("C:\\More.Tech\\VTBproject\\VTBproject\\Resources\\Data\\map.html");
         }
-        private void btn_LoadDataClicked(object sender, EventArgs e)
+        private async void btn_LoadDataClicked(object sender, EventArgs e)
         {
-            OfficeArray officeArray = new OfficeArray();
-            ATMList aTMList = new ATMList();
-
-            string OfficeFilePath = Path.Combine(System.AppContext.BaseDirectory, "offices.txt");
-            string ATMFilePath = Path.Combine(System.AppContext.BaseDirectory, "atms.txt");
-            OfficeFilePath = "C:\\More.Tech\\VTBproject\\VTBproject\\VTBproject\\Resources\\Data\\atms.txt";
-            ATMFilePath = "C:\\More.Tech\\VTBproject\\VTBproject\\VTBproject\\Resources\\Data\\offices.txt";
-            officeArray.GetListFromJson(File.ReadAllText(OfficeFilePath));
-            aTMList.GetListFromJson(File.ReadAllText(ATMFilePath));
+            Locator locator = new Locator();
+            string s = await GetCurrentLocation();
+            var k = s;
         }
+
+        public async Task<string> GetCurrentLocation()
+        {
+            try
+            {
+                var location = await Geolocation.GetLastKnownLocationAsync();
+                if (location == null)
+                {
+                    location = await Geolocation.GetLocationAsync(new GeolocationRequest()
+                    {
+                        DesiredAccuracy = GeolocationAccuracy.High,
+                        Timeout = TimeSpan.FromSeconds(30)
+                    });
+                }
+
+                if (location == null)
+                {
+                    return "Something went wrong. Cannot get your location.";
+                }
+                else
+                {
+                    return $"My Latitude and Longtidue: {location.Latitude}, {location.Longitude}";
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return "Err";
+        }
+
     }
 }

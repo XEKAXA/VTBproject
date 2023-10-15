@@ -1,14 +1,12 @@
-﻿using Microsoft.Maui.Controls.Shapes;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static VTBproject.ATM;
 
-namespace VTBproject
+namespace VTBproject.Geolocator.ATMs
 {
-    internal class ATM
+    public class ATM
     {
         public ATM(string address, double latitude, double logitude, bool allDay, Services services) 
         { 

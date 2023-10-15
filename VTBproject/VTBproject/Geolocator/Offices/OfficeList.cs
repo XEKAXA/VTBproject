@@ -5,15 +5,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace VTBproject
+namespace VTBproject.Geolocator.Offices
 {
-    internal class ATMList
+    public class OfficeArray
     {
-        public ATM[] Items;
+        public Office[] Items;
 
         public void GetListFromJson(string jsonStr)
         {
-            Items = JsonConvert.DeserializeObject<ATM[]>(jsonStr);
+            Items = JsonConvert.DeserializeObject<Office[]>(jsonStr);
         }
 
         public string ShowFirst5()
@@ -21,7 +21,7 @@ namespace VTBproject
             string result = "";
             for (int i = 0; i < 10; i++)
             {
-                result += Items[i].AvailableServices.Wheelchair.ServiceActivity + " ";
+                result += Items[i].Address + "|";
             }
             return result;
         }

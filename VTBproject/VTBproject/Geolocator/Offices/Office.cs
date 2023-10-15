@@ -4,11 +4,11 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 
-namespace VTBproject
+
+namespace VTBproject.Geolocator.Offices
 {
-    internal class Office
+    public class Office
     {
         public Office(string salePointName, string address, string status, List<OpenHours> listOpenHours,
                   string rko, List<OpenHours> openHoursIndividual, string officeType, string salePointFormat,
@@ -33,7 +33,7 @@ namespace VTBproject
             else Kep = Convert.ToBoolean(kep);
             MyBranch = myBranch;
         }
-        
+
         public string SalePointName { get; private set; }
         public string Address { get; private set; }
         public string Status { get; private set; }
@@ -63,4 +63,3 @@ namespace VTBproject
         }
     }
 }
-    
